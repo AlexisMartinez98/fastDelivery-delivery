@@ -1,6 +1,6 @@
 const navBar = () => {
   return (
-    <div className="bg-[#3D1DF3] flex justify-between">
+    <div className="bg-[#3D1DF3] flex justify-between border-b shadow-xl border-blue-950">
       <div className="ml-[30px] py-[10px]">
         <svg
           width="44"

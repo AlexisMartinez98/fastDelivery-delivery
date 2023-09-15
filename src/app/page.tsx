@@ -1,11 +1,10 @@
 import Image from "next/image";
-import NavBar from "./components/navBar";
+import Login from "./login/page";
 
 export default function Home() {
   return (
     <div>
-      <NavBar />
-      <h1>DELIVERY</h1>
+      <Login />
     </div>
   );
 }

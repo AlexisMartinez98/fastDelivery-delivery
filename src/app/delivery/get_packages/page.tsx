@@ -47,11 +47,11 @@ const page = () => {
           }}
         >
           <div className="mt-2 h-[460px] overflow-y-auto relative ">
-          <span className="ml-8 text-md "
+          <span className="ml-8 text-md"
          
           > ¿Cuántos paquetes repartirás hoy? </span>
 
-          <div className="mx-auto w-[260px] border-t border-[#3D1DF3] border-opacity-50 border-dotted my-3">
+          <div className="mx-auto w-[300px] border-t border-[#3D1DF3] border-opacity-60 border-dotted my-3 ">
 
           </div>
 

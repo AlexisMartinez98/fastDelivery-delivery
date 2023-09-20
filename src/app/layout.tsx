@@ -1,5 +1,6 @@
 import "./globals.css";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
+        <ToastContainer />
         <div>{children}</div>
       </body>
     </html>

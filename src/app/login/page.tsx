@@ -40,7 +40,6 @@ const page = () => {
             onChange={(e) => setValue({ ...value, email: e.target.value })}
             className="w-full h-14 rounded-2xl border-[1px] border-[#FFFFFF] bg-transparent pl-16 text-white"
             placeholder="email"
-            required
           />
 
           <svg
@@ -77,7 +76,6 @@ const page = () => {
             onChange={(e) => setValue({ ...value, password: e.target.value })}
             className="w-full h-14 rounded-2xl border-[1px] border-[#FFFFFF] bg-transparent pl-16 text-white"
             placeholder="contraseña"
-            required
           />
           <svg
             className="absolute right-2  top-4 h-6 w-12"
@@ -105,15 +103,21 @@ const page = () => {
             />
           </svg>
         </div>
+        <div className="pl-4 pr-4">
+          <button
+            type="submit"
+            className="bg-[#00EA77] text-[#3D1DF3] rounded-2xl w-full h-9  mb-5"
+          >
+            Ingresar
+          </button>
+          <Link href="/register">
+            <button className="border-[#00EA77] border-[1px] text-base text-white rounded-2xl w-full h-9  mb-5">
+              Crear Cuenta
+            </button>
+          </Link>
+        </div>
 
-        <button
-          type="submit"
-          className="bg-[#00EA77] text-[#3D1DF3] rounded-2xl w-full h-9  mb-5"
-        >
-          Ingresar
-        </button>
-
-        <h4 className="flex text-white text-xs items-center justify-center ">
+        <h4 className="flex text-white text-sm items-center justify-center ">
           OLVIDÉ MI CONTRASEÑA
         </h4>
       </div>

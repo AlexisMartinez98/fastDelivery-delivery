@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import { address } from "../../utils/helpers";
 import CheckboxAddress from "../../components/CheckboxAddress";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 type AddressItem = {
   id: any;
@@ -9,6 +12,11 @@ type AddressItem = {
 };
 
 const page = () => {
+  const router = useRouter();
+  const token = Cookies.get("token");
+  if (!token) {
+    router.push("/login");
+  }
   const totalPackages = address.length;
 
   return (

@@ -6,24 +6,19 @@ import { address } from "../../utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 type AddressItem = {
   id: any;
   address: string;
   status: string;
 };
-
 const page = () => {
   const router = useRouter();
+  const token = Cookies.get("token");
+  if (!token) {
+    router.push("/login");
+  }
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-
-    if (!token) {
-      router.push("/login");
-    }
-  }, []);
   return (
     <main className="flex flex-col mr-6 ml-6 mt-4 mb-8 font-poppins">
       <div className="pending-orders-block bg-white rounded-2xl text-[#3D1DF3] font-black py-4">

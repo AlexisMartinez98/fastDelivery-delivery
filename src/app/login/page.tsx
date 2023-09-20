@@ -5,6 +5,7 @@ import axios from "axios";
 import Logo from "./logo";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 const page = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const page = () => {
         "http://localhost:4000/api/v1/user/login",
         value
       );
-
+      Cookies.set("token", response.data.token);
       setValue(response.data);
       router.push("/delivery/start_day");
     } catch (error) {
@@ -27,6 +28,7 @@ const page = () => {
       toast.error("Credenciales invalidas");
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex justify-center items-center mt-20">

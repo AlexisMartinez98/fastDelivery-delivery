@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
 import BoxAddress from "@/app/components/BoxAddress";
 import BoxAddressOk from "@/app/components/BoxAddressOk";
 import { address } from "../../utils/helpers";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 type AddressItem = {
   id: any;
@@ -11,6 +15,15 @@ type AddressItem = {
 };
 
 const page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
   return (
     <main className="flex flex-col mr-6 ml-6 mt-4 mb-8 font-poppins">
       <div className="pending-orders-block bg-white rounded-2xl text-[#3D1DF3] font-black py-4">

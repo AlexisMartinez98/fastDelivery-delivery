@@ -1,6 +1,14 @@
-import Link from "next/link";
+"use client";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const navBar = () => {
+  const router = useRouter();
+  function clearCookies() {
+    Cookies.remove("token");
+    router.push("/login");
+  }
+
   return (
     <div className="bg-[#3D1DF3] flex justify-between border-b shadow-xl border-blue-950">
       <div className="ml-[30px] py-[10px]">
@@ -49,7 +57,7 @@ const navBar = () => {
         </svg>
       </div>
       <div className="mr-[30px] py-[10px]">
-        <Link href="/login">
+        <button onClick={clearCookies}>
           <svg
             width="33"
             height="34"
@@ -109,7 +117,7 @@ const navBar = () => {
               </filter>
             </defs>
           </svg>
-        </Link>
+        </button>
       </div>
     </div>
   );

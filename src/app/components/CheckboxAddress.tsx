@@ -1,6 +1,6 @@
 "use client";
 import React, {useState} from "react";
-import Count from "./commons/Count";
+import Count from "./Count";
 
 
 interface BoxAddressProps {
@@ -39,7 +39,7 @@ const CheckboxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId })
           /> 
  
         <div
-        className={`w-5 h-5 border border-[#3D1DF3] rounded-md ${
+        className={`w-5 h-5 border-2 border-[#3D1DF3] rounded-md ${
           isChecked ? "bg-[#c7ffb1]" : "bg-white"} absolute left-2`}>
         </div>
 

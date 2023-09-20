@@ -13,7 +13,7 @@ export function generateRandomId(): string {
     {
       id: generateRandomId(),
       address: "Av. Corrientes 1234, CABA",
-      status: "ENTREGADO",
+      status: "EN CURSO",
     },
     {
       id: generateRandomId(),

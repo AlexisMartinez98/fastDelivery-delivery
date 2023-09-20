@@ -1,38 +1,72 @@
+"use client"
+
 import Link from "next/link";
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
+import { log } from "console";
 
 const page = () => {
-  return (
-    <div className="mr-6 ml-6 mt-10 mb-8  rounded-2xl  text-[#3D1DF3] bg-[#C7FFB1]  ">
-      <div className="h-16 flex items-center justify-between  ">
-        <Link href="/login">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-8 h-8  mr-8 ml-6 "
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </Link>
-        <h1 className="m-4 font-black text-lg ">Creá tu cuenta</h1>
-        <div className="w-8 mr-8 ml-6 "></div>
-      </div>
+  const [value, setValue] = useState({
+    email:"",
+    password:"",
+    confirm_password: ""
+  });
+  
 
-      <div className="pt-5 bg-[#ffffff] rounded-xl  top-[-6px]">
+  const handleCreateAccount = async (e: any) => {
+    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXxx")
+    e.preventDefault()
+    console.log(value);
+    
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/user/register', value);
+
+      
+      console.log('XXXXXXXXX Respuesta del servidor:', response.data);
+      
+    } catch (error: any) {
+      console.error('Error al crear la cuenta:', error.response.data);
+    
+    }
+  };
+
+
+  return (
+
+    <main className="mr-6 ml-6 mt-10 mb-8  " >
+      <div className="profile-info rounded-tl-[8px] rounded-tr-[8px] text-[#3D1DF3] bg-[#C7FFB1] ">
+        <div className="h-16 flex items-center justify-between  ">
+          <Link href="/login">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-8 h-8  mr-8 ml-6 "
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </Link>
+          <h1 className="m-4 font-black text-lg ">Creá tu cuenta</h1>
+          <div className="w-8 h-8  mr-8 ml-6 "></div>
+        </div>
+      </div>
+      <form className="pt-5 bg-[#ffffff] rounded-xl relative top-[-6px]" onSubmit={handleCreateAccount}>
+
         <div className="p-4 mt-20">
           <div className="relative mb-3">
             <input
               type="text"
+              value={value.email}
               className="w-full h-14 rounded-2xl border-[1px] border-[#3D1DF3] bg-transparent pl-14 text-[#3D1DF3]"
               placeholder="email"
               required
+              onChange={(e) => setValue({ ...value, email: e.target.value })}
             />
 
             <svg
@@ -66,9 +100,11 @@ const page = () => {
 
             <input
               type="password"
+              value={value.password}
               className="w-full h-14 rounded-2xl border-[1px] border-[#3D1DF3] bg-transparent pl-14 text-[#3D1DF3]"
               placeholder="contraseña"
               required
+              onChange={(e) => setValue({ ...value, password: e.target.value })}
             />
             <svg
               className="absolute right-2  top-4 h-6 w-12"
@@ -115,7 +151,9 @@ const page = () => {
               type="password"
               className="w-full h-14 rounded-2xl border-[1px] border-[#3D1DF3] bg-transparent pl-14 text-[#3D1DF3]"
               placeholder="Confirmar contraseña"
+              value= {value.confirm_password}
               required
+              onChange={(e) => setValue({ ...value, confirm_password: e.target.value })}
             />
             <svg
               className="absolute right-2  top-4 h-6 w-12"
@@ -144,7 +182,7 @@ const page = () => {
             </svg>
           </div>
           <Link href="/">
-            <button className="bg-[#00EA77] text-[#3D1DF3] rounded-2xl w-full h-9 text-lg mb-2 mt-20 /">
+            <button  type="submit" className="bg-[#00EA77] text-[#3D1DF3] rounded-2xl w-full h-9 text-lg mb-2 mt-20 /" onClick={handleCreateAccount}>
               Crear
             </button>
           </Link>
@@ -160,8 +198,10 @@ const page = () => {
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+
+      </form>
+    </main>
+
   );
 };
 

@@ -32,6 +32,7 @@ const page = () => {
 
 
   return (
+
     <main className="mr-6 ml-6 mt-10 mb-8  " >
       <div className="profile-info rounded-tl-[8px] rounded-tr-[8px] text-[#3D1DF3] bg-[#C7FFB1] ">
         <div className="h-16 flex items-center justify-between  ">
@@ -56,6 +57,7 @@ const page = () => {
         </div>
       </div>
       <form className="pt-5 bg-[#ffffff] rounded-xl relative top-[-6px]" onSubmit={handleCreateAccount}>
+
         <div className="p-4 mt-20">
           <div className="relative mb-3">
             <input
@@ -184,7 +186,7 @@ const page = () => {
               Crear
             </button>
           </Link>
-          <h4 className="flex text-[#3D1DF3] text-xs items-center mb-2 justify-center ">
+          <h4 className="flex text-[#3D1DF3] text-sm items-center mb-2 justify-center ">
             ¿Ya tenés una cuenta?
           </h4>
           <Link href="/">
@@ -196,8 +198,10 @@ const page = () => {
             </button>
           </Link>
         </div>
+
       </form>
     </main>
+
   );
 };
 

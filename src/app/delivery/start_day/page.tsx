@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
 import BoxAddress from "@/app/components/BoxAddress";
 import BoxAddressOk from "@/app/components/BoxAddressOk";
 import { address } from "../../utils/helpers";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 type AddressItem = {
   id: any;
@@ -11,11 +15,21 @@ type AddressItem = {
 };
 
 const page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
   return (
     <main className="flex flex-col mr-6 ml-6 mt-4 mb-8 font-poppins">
       <div className="pending-orders-block bg-white rounded-2xl text-[#3D1DF3] font-black py-4">
         <div className="flex justify-between">
           <h2 className="ml-5">Repartos pendientes</h2>
+
           <svg
             width="9"
             height="7"
@@ -75,9 +89,11 @@ const page = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="bg-[#00EA77] text-[#3D1DF3] mt-4 rounded-full py-1 w-[310px]">
-          Obtener Paquetes
-        </button>
+        <Link href="/delivery/get_packages">
+          <button className="bg-[#00EA77] text-[#3D1DF3] mt-4 rounded-full py-1 w-[310px]">
+            Obtener Paquetes
+          </button>
+        </Link>
       </div>
     </main>
   );

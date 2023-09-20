@@ -1,4 +1,4 @@
-"use client";
+"use strict";
 import React from "react";
 interface BoxAddressProps {
   address: string;
@@ -6,7 +6,11 @@ interface BoxAddressProps {
   itemId: string;
 }
 
-const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
+const BoxAddressOk: React.FC<BoxAddressProps> = ({
+  address,
+  status,
+  itemId,
+}) => {
   return (
     <div className="flex mx-5 py-3 border-[#3D1DF3] border-[1.5px] rounded-2xl items-center my-3">
       <svg
@@ -68,4 +72,4 @@ const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
   );
 };
 
-export default BoxAddress;
+export default BoxAddressOk;

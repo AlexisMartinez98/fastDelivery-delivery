@@ -1,10 +1,18 @@
+"use client";
 import React from "react";
 import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_etc.";
 import ButtonCancelarEntrega from "@/app/components/Button_Cancelar_Entrega";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 function DeliveryInProgress() {
+  const router = useRouter();
+  const token = Cookies.get("token");
+  if (!token) {
+    router.push("/login");
+  }
   return (
     <main className="mr-6 ml-6 mt-4 mb-8 font-poppins ">
       <div className="profile-info rounded-tl-[10px] rounded-tr-[10px] text-[#3D1DF3] bg-[#C7FFB1] pb-2">

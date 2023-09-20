@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 interface BoxAddressProps {
   address: string;

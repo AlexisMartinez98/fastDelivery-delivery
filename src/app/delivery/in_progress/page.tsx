@@ -61,10 +61,12 @@ function DeliveryInProgress() {
             Recibe: <span className="font-light">David Rodriguez</span>
           </p>
         </div>
+        <div className="w-[100%] flex justify-center mt-2">
         <ButtonIngresarFinalizar buttonName={"Finalizar"} />
+        </div>
       </div>
 
-      <div className="w-[100%] flex justify-center my-4">
+      <div className="w-[100%] flex justify-center my-3">
         <ButtonCancelarEntrega buttonName={"Cancelar entrega"} />
       </div>
     </main>

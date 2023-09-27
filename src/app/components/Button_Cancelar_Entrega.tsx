@@ -6,7 +6,7 @@ interface buttonNameProps {
 
 const ButtonCancelarEntrega: React.FC<buttonNameProps> = ({ buttonName }) => {
   return (
-    <button className="text-[#ffffff] rounded-2xl w-[90%] h-9 border-[#ffffff] border-[1.5px] mx-auto">
+    <button className="text-[#ffffff] rounded-2xl w-[90%] h-9 border-[#00EA77] border-[2px] mx-auto">
       {`${buttonName}`}
     </button>
   );

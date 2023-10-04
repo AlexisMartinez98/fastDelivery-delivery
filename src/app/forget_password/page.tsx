@@ -29,7 +29,7 @@ const page = () => {
 
   return (
     <div className="mr-6 ml-6 mt-10 mb-8  rounded-2xl  text-[#3D1DF3] bg-[#C7FFB1]  ">
-      <div className="h-16 flex items-center justify-between  ">
+      <div className="h-16 flex text-center w-auto ">
         <Link href="/login">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const page = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-8 h-8 mr-8 ml-6 "
+            className="w-8 h-8 mr-4 ml-6 mt-5 "
           >
             <path
               strokeLinecap="round"
@@ -46,15 +46,17 @@ const page = () => {
             />
           </svg>
         </Link>
-        <h1 className="m-4 font-black text-lg w-auto">Contraseña</h1>
-        <div className="w-8 h-8  mr-8 ml-6 "></div>
+        <h1 className=" font-black text-lg mt-5 ml-4">Recuperar contraseña</h1>
       </div>
 
       <form
-        className="pt-5 bg-[#ffffff] rounded-xl  top-[-6px]"
+        className="pt-5 bg-[#ffffff] rounded-xl h-full top-[-6px]"
         onSubmit={handleCreateAccount}
       >
         <div className="p-4 mt-20">
+          <h4 className="flex mb-7 text-sm items-center justify-center ">
+            Introduzca el correo de la cuenta asociada
+          </h4>
           <div className="relative mb-3">
             <input
               type="text"
@@ -79,10 +81,10 @@ const page = () => {
               />
             </svg>
           </div>
-          <div className="mt-20">
+          <div className=" mt-60  ">
             <button
-              className=" text-[#3D1DF3] border-[#00EA77] border-[1px] 
-            rounded-2xl w-full h-9 text-md mb-1"
+              className=" text-[#3D1DF3] bg-[#00EA77] border-[1px] 
+            rounded-2xl w-full h-9 text-lg mb-1"
             >
               Enviar correo
             </button>

@@ -22,7 +22,7 @@ const page = () => {
         value
       );
       router.push("/login");
-      toast.success("Creado correctamente. Inicie sesion ");
+      toast.success("Creado correctamente, verifique su cuenta ");
     } catch (error: any) {
       console.error("Error al crear la cuenta:", error.response.data);
     }

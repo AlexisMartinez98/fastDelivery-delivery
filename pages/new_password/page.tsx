@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const NewPasswordPage = () => {
   const [value, setValue] = useState({
@@ -31,12 +32,28 @@ const NewPasswordPage = () => {
 
   return (
     <div className="mr-6 ml-6 mt-10 mb-8  rounded-2xl  text-[#3D1DF3] bg-[#C7FFB1]">
-      <div className="h-16 flex items-center justify-center">
-        <h1 className="m-4 font-black text-lg w-auto">Contraseña</h1>
+      <div className="h-16 flex items-center ">
+        <Link href="/login">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-8 h-8  mr-8 ml-8 "
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </Link>
+        <h1 className="mr-4 font-black text-lg w-auto">Recuperar contraseña</h1>
       </div>
 
       <form
-        className="pt-5 bg-[#ffffff] rounded-xl  top-[-6px]"
+        className="pt-5 bg-[#ffffff]  rounded-xl  top-[-6px]"
         onSubmit={handleCreateAccount}
       >
         <div className="p-4 mt-20">
@@ -140,10 +157,10 @@ const NewPasswordPage = () => {
               />
             </svg>
           </div>
-          <div className="mt-20">
+          <div className=" mt-60">
             <button
-              className=" text-[#3D1DF3] border-[#00EA77] border-[1px] 
-            rounded-2xl w-full h-9 text-md mb-1"
+              className=" text-[#3D1DF3] bg-[#00EA77] border-[1px] 
+              rounded-2xl w-full h-9 text-lg mb-1"
             >
               Cambiar contraseña
             </button>

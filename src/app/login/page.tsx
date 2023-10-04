@@ -119,9 +119,11 @@ const page = () => {
           </Link>
         </div>
 
-        <h4 className="flex text-white text-sm items-center justify-center ">
-          OLVIDÉ MI CONTRASEÑA
-        </h4>
+        <Link href="/forget_password">
+          <h4 className="flex text-white text-sm items-center justify-center ">
+            OLVIDÉ MI CONTRASEÑA
+          </h4>
+        </Link>
       </div>
     </form>
   );

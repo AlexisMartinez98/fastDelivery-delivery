@@ -2,17 +2,37 @@
 import React from "react";
 import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_etc.";
 import ButtonCancelarEntrega from "@/app/components/Button_Cancelar_Entrega";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Map from "@/app/components/Map";
+import axios from "axios";
+
 
 function DeliveryInProgress() {
+  //este codigo en algún momento hay que borrarlo
   const router = useRouter();
   const token = Cookies.get("token");
   if (!token) {
     router.push("/login");
   }
+    //=======================================>
+
+
+//id harcodeado para hacer pedido axios
+
+    const id="653babf0f04d01f210398364"
+
+    const finalizarEntrega:any=()=>{
+      
+      axios.put(`http://localhost:4000/api/v1/delivery/finishDelivery/${id}`)
+      .then((response)=>{console.log(response.data)})
+      .catch((error)=>{console.log(error)})
+ 
+    }
+
+
+  
   return (
     <main className="mr-6 ml-6 mt-4 mb-8 font-poppins ">
       <div className="profile-info rounded-tl-[10px] rounded-tr-[10px] text-[#3D1DF3] bg-[#C7FFB1] pb-2">
@@ -41,14 +61,8 @@ function DeliveryInProgress() {
       </div>
 
       <div className="py-5 bg-[#ffffff] rounded-xl relative top-[-7px] flex flex-col items-center ">
-        <div className="w-[90%] h-[327px] rounded-xl border-[#3D1DF3] border-[1.5px]">
-          <Image
-            className=" w-[100%] h-[100%] object-cover rounded-xl"
-            width={500}
-            height={500}
-            src="/assets/map.png"
-            alt="map"
-          ></Image>
+        <div className="w-[90%] h-[327px] rounded-xl border-[#3D1DF3] border-[1.5px]" >
+        <Map/>
         </div>
         <div className="my-5 w-[90%] text-[0.90rem] font-semibold text-[#3D1DF3] ">
           <p className="mt-1">
@@ -62,7 +76,7 @@ function DeliveryInProgress() {
           </p>
         </div>
         <div className="w-[100%] flex justify-center mt-2">
-        <ButtonIngresarFinalizar buttonName={"Finalizar"} />
+        <ButtonIngresarFinalizar buttonName={"Finalizar"} finalizarEntrega={finalizarEntrega} />
         </div>
       </div>
 

@@ -17,6 +17,11 @@ export function generateRandomId(): string {
     },
     {
       id: generateRandomId(),
+      address: "Av. Corrientes 3214, CABA",
+      status: "PENDIENTE",
+      },
+    {
+      id: generateRandomId(),
       address: "Calle San Martín 567, CABA",
       status: "ENTREGADO",
     },

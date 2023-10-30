@@ -40,7 +40,7 @@ const page = () => {
           </svg>
         </div>
         <div className="h-auto overflow-y-auto relative">
-          {address.slice(0, 1).map((item: AddressItem) => (
+          {address.slice(0, 2).map((item: AddressItem) => (
             <BoxAddress
               key={item.id}
               itemId={item.id}

@@ -1,10 +1,13 @@
 "use strict";
 import React from "react";
 import Link from "next/link";
+
+
 interface BoxAddressProps {
 address: string;
 status: string;
 itemId: string;
+
 }
 
 const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {

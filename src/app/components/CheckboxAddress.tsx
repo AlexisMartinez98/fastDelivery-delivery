@@ -1,17 +1,19 @@
 "use client";
 import React, {useState} from "react";
-import Count from "./Count";
+
 
 
 interface BoxAddressProps {
   address: string;
   status: string;
   itemId: string;
+  onCheckboxClick: (itemId: string) => void;
+  isChecked: boolean;
 }
 
-const CheckboxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
+const CheckboxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId, onCheckboxClick, }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [amount, setAmount] = useState(0);
+  
 
 
   const customCheckboxStyle = {
@@ -20,6 +22,7 @@ const CheckboxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId })
     backgroundColor: isChecked ? "#3D1DF3" : "#FFFFFF",
     borderRadius: "4px",
   };
+  
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -65,9 +68,7 @@ const CheckboxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId })
         </p>
       </div>
     </div>
-        <div className="ml-auto mr-4">
-            <Count amount={amount} setAmount={setAmount} />
-        </div>
+       
   </div>
 );
 };

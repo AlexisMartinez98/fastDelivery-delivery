@@ -1,16 +1,13 @@
 "use client";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
 import CheckboxAddress from "../../components/CheckboxAddress";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-
 type AddressItem = {
-  id: string;
+  _id: string;
   address: string;
 };
 
@@ -19,7 +16,8 @@ const Page = () => {
   const token = Cookies.get("token");
   const [packages, setPackages] = useState<AddressItem[]>([]);
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
-  const [checkedPackages, setCheckedPackages] = useState<Record<string, boolean>>({});
+  const [deliveryMan_id, setDeliveryMan_id] = useState<string[]>([]);
+
   useEffect(() => {
     if (!token) {
       router.push("/login");
@@ -28,49 +26,26 @@ const Page = () => {
         .get("http://localhost:4000/api/v1/delivery/allPackages")
         .then((response) => {
           setPackages(response.data);
-          // const initialCheckedState = response.data.reduce(
-          //   (acc, item) => ({ ...acc, [item.id]: false }),
-          //   {}
-          // );
-         // setCheckedPackages(initialCheckedState);
         })
         .catch((error) => console.error("Error al obtener paquetes:", error));
     }
   }, [token, router]);
 
-  const handleCheckboxClick = (itemId: string) => {
- 
-    const isSelected = selectedPackages.includes(itemId);
-
-  if (isSelected) {
-        setSelectedPackages(selectedPackages.filter((id) => id !== itemId));
-  } else {
-    
-    setSelectedPackages([...selectedPackages, itemId]);
-  }
-  };
-
   const handleStartDay = () => {
-    
     if (selectedPackages.length === 0) {
       alert("Selecciona al menos un paquete antes de iniciar la jornada.");
       return;
     }
-  
-  
     axios
       .patch("http://localhost:4000/api/v1/delivery/takePackage", {
-        packageIds: selectedPackages,
+        package_id: selectedPackages[0],
+        deliveryMan_id: "65410b716779c1588883b5d7",
+        assigned: true,
       })
       .then((response) => {
-        
         console.log("Paquetes asignados con éxito:", response.data);
-  
-        
-        router.push("/delivery/start_day");
       })
       .catch((error) => {
-       
         console.error("Error al asignar paquetes:", error);
       });
   };
@@ -108,18 +83,19 @@ const Page = () => {
           }}
         >
           <div className="mt-2 h-[460px] overflow-y-auto relative">
-            <span className="ml-8 text-md"> ¿Cuántos paquetes repartirás hoy? </span>
+            <span className="ml-8 text-md">
+              {" "}
+              ¿Cuántos paquetes repartirás hoy?{" "}
+            </span>
 
             <div className="mx-auto w-[300px] border-t border-[#3D1DF3] border-opacity-60 border-dotted my-3"></div>
 
             {packages.map((item: AddressItem) => (
               <CheckboxAddress
-                key={item.id}
-                itemId={item.id}
+                key={item._id}
+                itemId={item._id}
                 address={item.address}
-                status=""
-                onCheckboxClick={handleCheckboxClick}
-                isChecked={selectedPackages.includes(item.id)}
+                setSelectedPackages={setSelectedPackages}
               />
             ))}
           </div>
@@ -133,7 +109,6 @@ const Page = () => {
       >
         Iniciar jornada
       </button>
-
     </main>
   );
 };

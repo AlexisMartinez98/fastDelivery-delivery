@@ -24,6 +24,7 @@ function Map() {
   const [directionResponse, setDirectionResponse] =
     useState<google.maps.DirectionsResult | null>(null);
 
+    //agregar la key aca
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "",
     libraries: ["places"],

@@ -125,6 +125,7 @@ const Page = () => {
           </div>
         </div>
       </div>
+
       <button
         type="button"
         onClick={handleStartDay}
@@ -132,6 +133,7 @@ const Page = () => {
       >
         Iniciar jornada
       </button>
+
     </main>
   );
 };

@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 import BoxAddress from "@/app/components/BoxAddress";
 import BoxAddressOk from "@/app/components/BoxAddressOk";
-import { address } from "../../utils/helpers";
+// import { address } from "../../utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -18,6 +19,18 @@ const page = () => {
   if (!token) {
     router.push("/login");
   }
+
+  const [pendingPackages, setPendingPackages] = useState([]);
+  const [deliveredPackages, setDeliveredPackages] = useState([]);
+
+  useEffect(() => {
+        
+    axios
+      .get("http://localhost:4000/api/v1/delivery/history")
+      .then((response) => setDeliveredPackages(response.data))
+      .catch((error) => console.error("Error al obtener historial de entregas:", error));
+  }, []);
+
 
   return (
     <main className="flex flex-col mr-6 ml-6 mt-4 mb-8 font-poppins">
@@ -40,14 +53,14 @@ const page = () => {
           </svg>
         </div>
         <div className="h-auto overflow-y-auto relative">
-          {address.slice(0, 2).map((item: AddressItem) => (
+          {/* {address.slice(0, 2).map((item: AddressItem) => (
             <BoxAddress
               key={item.id}
               itemId={item.id}
               address={item.address}
               status={item.status}
             />
-          ))}
+          ))} */}
         </div>
       </div>
       <div className="rounded-2xl py-4 bg-white mt-4">
@@ -69,10 +82,10 @@ const page = () => {
             </svg>
           </div>
           <p className="ml-5 font-normal text-xs mt-1">
-            {address.length} paquetes entregados
+            {deliveredPackages.length} paquetes entregados
           </p>
           <div className="mt-3 h-[310px] overflow-y-auto relative">
-            {address.map((item: AddressItem) => (
+            {deliveredPackages.map((item: AddressItem) => (
               <BoxAddressOk
                 key={item.id}
                 itemId={item.id}

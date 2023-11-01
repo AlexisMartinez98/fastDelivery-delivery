@@ -70,7 +70,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Link href="/delivery/in_progress">
+      <Link href="/delivery/declaration">
         <button
           type="submit"
           className="w-full max-w-xl bg-customGreen hover:bg-blue-600 text-[#3D1DF3] py-[6px] px-4 rounded-full mt-4"

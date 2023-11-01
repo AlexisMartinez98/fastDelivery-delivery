@@ -20,7 +20,7 @@ const page = () => {
     router.push("/login");
   }
 
-  const [pendingPackages, setPendingPackages] = useState([]);
+  //const [pendingPackages, setPendingPackages] = useState([]);
   const [deliveredPackages, setDeliveredPackages] = useState([]);
 
   useEffect(() => {

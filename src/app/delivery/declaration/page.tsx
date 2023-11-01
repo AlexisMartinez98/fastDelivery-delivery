@@ -84,7 +84,7 @@ console.log("problems",personalProblems)
 
 
   return (
-    <main className="mr-6 ml-6 mt-4 mb-8 font-poppins ">
+    <main className="mr-6 ml-6 mt-4 mb-4 font-poppins ">
       <div className="profile-info rounded-tl-[10px] rounded-tr-[10px] text-[#3D1DF3] bg-[#C7FFB1] pb-2">
         <div className="h-16 flex items-center justify-between  ">
           <Link href="/delivery/get_packages">
@@ -116,7 +116,7 @@ console.log("problems",personalProblems)
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
         <div className="w-[90%] mx-auto">
-          <p className="text-center text-[15px] mt-[2%]">
+          <p className="text-center text-[14px] mt-[2%] font-medium">
               ¿Ha consumido bebidas alcoholícas
               <br />
               en las ultimas 12 horas
@@ -134,11 +134,11 @@ console.log("problems",personalProblems)
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
           <div className="w-[90%] mx-auto">
-          <p className="text-center text-[15px] my-[2%]">
+          <p className="text-center text-[14px] my-[2%] font-medium">
               ¿Usted está haciendo uso de algún
               <br /> tipo de medicamento psicoactivo?
             </p>
-            <p className="text-center text-[14px]">
+            <p className="text-center text-[13px]">
               <i>
                 por ejemplo tranquilizantes,antigripales, <br />
                 antialergicos o para insomnio
@@ -156,7 +156,7 @@ console.log("problems",personalProblems)
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
         <div className="w-[90%] mx-auto">
-          <p className="text-center text-[15px] mt-[2%]">
+          <p className="text-center text-[14px] mt-[2%] font-medium">
               ¿Tiene usted algún problema familiar,
               <br /> emocional o de cualquier <br />
               tipo que lo distraiga?

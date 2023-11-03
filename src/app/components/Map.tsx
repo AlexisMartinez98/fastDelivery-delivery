@@ -26,7 +26,7 @@ function Map() {
 
     //agregar la key aca
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBgSTfiSrJsLXl7G7cP04NVX0jBC01Weuo",
+    googleMapsApiKey: "",
     libraries: ["places"],
   });
 

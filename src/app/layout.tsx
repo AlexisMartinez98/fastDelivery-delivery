@@ -1,8 +1,11 @@
+"use client"
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
+import { Provider } from "react-redux";
+import store from "./states/store";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,10 +24,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Provider store={store}>
       <body className={`${poppins.className}`}>
         <ToastContainer />
         <div>{children}</div>
       </body>
+      </Provider>
     </html>
   );
 }

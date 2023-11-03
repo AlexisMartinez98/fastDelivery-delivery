@@ -1,6 +1,13 @@
+"use client"
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "../components/navBar";
+import { useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "../states/user";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +21,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  const dispatch=useDispatch()
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/v1/user/me", {
+        headers: {
+          cookies: `${Cookies.get("token")}`,
+        },
+      })
+      .then((response) => {
+        console.log( response.data);
+        dispatch(setUser(response.data))
+      })
+ 
+  }, []);
+
+
   return (
     <div>
       <NavBar />

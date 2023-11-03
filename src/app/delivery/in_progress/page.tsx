@@ -106,7 +106,7 @@ function DeliveryInProgress() {
         <div className="w-[100%] flex justify-center mt-2">
           <ButtonIngresarFinalizar
             buttonName={"Finalizar"}
-            finalizarEntrega={finalizarEntrega}
+            finalizar={finalizarEntrega}
           />
         </div>
       </div>

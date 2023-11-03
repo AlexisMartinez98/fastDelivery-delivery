@@ -1,18 +1,19 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BoxAddress from "@/app/components/BoxAddress";
 import BoxAddressOk from "@/app/components/BoxAddressOk";
-// import { address } from "../../utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 type AddressItem = {
   id: any;
   address: string;
   status: string;
 };
+
 const page = () => {
   const router = useRouter();
   const token = Cookies.get("token");
@@ -20,17 +21,24 @@ const page = () => {
     router.push("/login");
   }
 
-  //const [pendingPackages, setPendingPackages] = useState([]);
+  // eslint-disable-next-line
+  const user = useSelector((state) => state.user);
+
+  const [pendingPackages, setPendingPackages] = useState([]);
   const [deliveredPackages, setDeliveredPackages] = useState([]);
 
   useEffect(() => {
-        
-    axios
-      .get("http://localhost:4000/api/v1/delivery/history")
-      .then((response) => setDeliveredPackages(response.data))
-      .catch((error) => console.error("Error al obtener historial de entregas:", error));
-  }, []);
+    if (user.id) {
+      axios
+        .post("http://localhost:4000/api/v1/delivery/history", { deliveryMan_id: user.id })
+        .then((response) => {
+          setDeliveredPackages(response.data)
+        })
+        .catch((error) => console.error("Error al obtener historial de entregas:", error));
+    }
+  }, [user]);
 
+  console.log("xxxxxxxxxx", deliveredPackages);
 
   return (
     <main className="flex flex-col mr-6 ml-6 mt-4 mb-8 font-poppins">

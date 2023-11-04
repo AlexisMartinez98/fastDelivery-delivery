@@ -5,40 +5,88 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 
 const page = () => {
   const router = useRouter();
   const [image, setImage] = useState("");
-  const [value, setValue] = useState({
+  
+  const[visiblePassword,setVisiblePassword]=useState(false)
+  const handleVisiblePassword=()=>{
+    setVisiblePassword(!visiblePassword)
+  }
+  const[visibleConfirmPassword,setVisibleConfirmPassword]=useState(false)
+  const handleVisibleConfirmPassword=()=>{
+    setVisibleConfirmPassword(!visibleConfirmPassword)
+  }
+
+
+
+const singUpForm = useFormik({
+  initialValues: {
     name: "",
     last_name: "",
     email: "",
     password: "",
-    confirm_password: "",
-  });
+    confirm_password:"",
+    image:""
+  
+  },
 
+  validationSchema: Yup.object({
+    name: Yup.string()
+      .min(2, "Nombre debe tener al menos 1 carácter")
+      .required("Nombre es requerido"),
+    last_name: Yup.string()
+      .min(2, "Apellido debe tener al menos 1 carácter")
+      .required("Apellido es requerido"),
+    email: Yup.string().email("correo electrónico inválido").required("Correo electronico es requerido"),
+    password: Yup.string()
+      .min(8, "Debe tener al menos 8 caracteres")
+      .matches(/\d/, "Debe contener al menos un número")
+      .matches(/[a-z]/, "Debe contener al menos una letra minúscula")
+      .matches(/[A-Z]/, "Debe contener al menos una letra mayúscula")
+      .required("Password es requerido"),
+      
+      confirm_password: Yup.string()
+    .oneOf([Yup.ref("password"), ""], "Confirmación erronea de password")
+    .required("Confirmación de password es requerido"),
+  }),
 
-  const handleCreateAccount = async (e: any) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
+  onSubmit: (values) => {
+    axios
+      .post(
         "http://localhost:4000/api/v1/user/register",
         {
-          name: value.name,
-          last_name: value.last_name,
+          name: values.name,
+          last_name: values.last_name,
+          email: values.email,
+          password: values.password,
+          confirm_password:values.confirm_password,
           image: image,
-          email:value.email,
-          password: value.password,
-          confirm_password: value.confirm_password
-          
-        }
-      );
-      router.push("/login");
+        },
+        { withCredentials: true }
+      )
+      .then((res) => res.data)
+      .then(() => {
+        router.push("/login");
       toast.success("Creado correctamente, verifique su cuenta ");
-    } catch (error: any) {
-      console.error("Error al crear la cuenta:", error.response.data);
-    }
-  };
+        
+      })
+
+      .catch((error) => {
+        const captureError =
+          error.response.data
+       toast.error(captureError)
+       console.log(error)
+      });
+  },
+});
+
+
+  
   const handleImage = (e: any) => {
     const file = e.target.files[0];
     const maxSizeInBytes = 1024 * 60;
@@ -86,7 +134,7 @@ const page = () => {
 
       <form
         className="pt-5 bg-[#ffffff] rounded-xl  top-[-6px]"
-        onSubmit={handleCreateAccount}
+        onSubmit={singUpForm.handleSubmit}
       >
         <div className="p-4 ">
           <div className="mb-5 flex justify-center">
@@ -149,44 +197,74 @@ const page = () => {
           <div className="relative mb-3">
             <input
               type="text"
-              value={value.name}
-              className="w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] border-[#3D1DF3] bg-transparent pl-5 text-[#3D1DF3]"
+              id="name"
+              className={`w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] ${singUpForm.touched.name && singUpForm.errors.name ? "border-[red]":"border-[#3D1DF3]"} bg-transparent pl-5 text-[#3D1DF3]`}
               placeholder="Nombre"
               required
-              onChange={(e) => setValue({ ...value, name: e.target.value })}
+              onChange={singUpForm.handleChange}
+              value={singUpForm.values.name}
+                  onBlur={singUpForm.handleBlur}
             />
+            {singUpForm.touched.name && singUpForm.errors.name && (
+                    <p style={{ color: "red", fontSize:"0.8rem"}}>
+                      {singUpForm.errors.name}
+                    </p>
+                  ) }
           </div>
           <div className="relative mb-3">
             <input
               type="text"
-              value={value.last_name}
-              className="w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] border-[#3D1DF3] bg-transparent pl-5 text-[#3D1DF3]"
+              className={`w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] ${singUpForm.touched.last_name && singUpForm.errors.last_name ? "border-[red]":"border-[#3D1DF3]"} bg-transparent pl-5 text-[#3D1DF3]`}
               placeholder="Apellido"
+              id="last_name"
               required
-              onChange={(e) =>
-                setValue({ ...value, last_name: e.target.value })
-              }
+
+              onChange={singUpForm.handleChange}
+              value={singUpForm.values.last_name}
+                  onBlur={singUpForm.handleBlur}
             />
+            {singUpForm.touched.last_name && singUpForm.errors.last_name && (
+                    <p style={{ color: "red", fontSize:"0.8rem"}}>
+                      {singUpForm.errors.last_name}
+                    </p>
+                  ) }
+          
           </div>
           <div className="relative mb-3">
             <input
               type="text"
-              value={value.email}
-              className="w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] border-[#3D1DF3] bg-transparent pl-5 text-[#3D1DF3]"
+              id="email"
+              className={`w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] ${singUpForm.touched.email && singUpForm.errors.email ? "border-[red]":"border-[#3D1DF3]"} bg-transparent pl-5 text-[#3D1DF3]`}
               placeholder="Email@contraseña.com"
               required
-              onChange={(e) => setValue({ ...value, email: e.target.value })}
+              onChange={singUpForm.handleChange}
+              value={singUpForm.values.email}
+                  onBlur={singUpForm.handleBlur}
             />
+            {singUpForm.touched.email && singUpForm.errors.email && (
+                    <p style={{ color: "red", fontSize:"0.8rem"}}>
+                      {singUpForm.errors.email}
+                    </p>
+                  ) }
           </div>
           <div className="relative mb-3">
             <input
-              type="password"
-              value={value.password}
-              className="w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] border-[#3D1DF3] bg-transparent pl-5 text-[#3D1DF3]"
+              type={visiblePassword ? "text":"password"}
+              id="password"
+              className={`w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] ${singUpForm.touched.password && singUpForm.errors.password ? "border-[red]":"border-[#3D1DF3]"} bg-transparent pl-5 text-[#3D1DF3]`}
               placeholder="Contraseña"
               required
-              onChange={(e) => setValue({ ...value, password: e.target.value })}
+              onChange={singUpForm.handleChange}
+              value={singUpForm.values.password}
+                  onBlur={singUpForm.handleBlur}
             />
+            {singUpForm.touched.password && singUpForm.errors.password && (
+                    <p style={{ color: "red", fontSize:"0.8rem"}}>
+                      {singUpForm.errors.password}
+                    </p>
+                  ) }
+              
+     
             <svg
               className="absolute right-2  top-4 h-6 w-12"
               width="20"
@@ -194,6 +272,7 @@ const page = () => {
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={handleVisiblePassword}
             >
               <path
                 d="M7.99998 6.22981C8.60766 6.08484 9.2736 6 9.99998 6C12.7879 6 14.6853 7.24978 15.8167 8.35217C16.3833 8.90426 16.6666 9.18031 16.6666 10C16.6666 10.8197 16.3833 11.0957 15.8167 11.6478C14.6853 12.7502 12.7879 14 9.99998 14C7.21206 14 5.31462 12.7502 4.18324 11.6478C3.61662 11.0957 3.33331 10.8197 3.33331 10C3.33331 9.18031 3.61662 8.90426 4.18324 8.35217C4.50406 8.03957 4.88647 7.71513 5.33331 7.41069"
@@ -209,21 +288,26 @@ const page = () => {
                 y1="16.4727"
                 x2="16.9995"
                 y2="3.61694"
-                stroke="#3D1DF3"
+                stroke={visiblePassword ? "":"#3D1DF3"}
               />
             </svg>
           </div>
           <div className="relative ">
             <input
-              type="password"
-              className="w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] border-[#3D1DF3] bg-transparent pl-5 text-[#3D1DF3]"
+              type={visibleConfirmPassword ? "text":"password"}
+              id="confirm_password"
+              className={`w-full h-12 rounded-2xl border-[1px] placeholder-[#3D1DF3] ${singUpForm.touched.confirm_password && singUpForm.values.confirm_password !== singUpForm.values.password ? "border-[red]":"border-[#3D1DF3]"} bg-transparent pl-5 text-[#3D1DF3]`}
               placeholder="Confirmar contraseña"
-              value={value.confirm_password}
               required
-              onChange={(e) =>
-                setValue({ ...value, confirm_password: e.target.value })
-              }
+              onChange={singUpForm.handleChange}
+              value={singUpForm.values.confirm_password}
+                  onBlur={singUpForm.handleBlur}           
             />
+             {singUpForm.touched.confirm_password && singUpForm.values.confirm_password !== singUpForm.values.password && (
+                    <p style={{ color: "red", fontSize:"0.8rem"}}>
+                      {singUpForm.errors.confirm_password}
+                    </p>
+                  ) }
             <svg
               className="absolute right-2  top-4 h-6 w-12"
               width="20"
@@ -231,6 +315,8 @@ const page = () => {
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={handleVisibleConfirmPassword}
+              
             >
               <path
                 d="M7.99998 6.22981C8.60766 6.08484 9.2736 6 9.99998 6C12.7879 6 14.6853 7.24978 15.8167 8.35217C16.3833 8.90426 16.6666 9.18031 16.6666 10C16.6666 10.8197 16.3833 11.0957 15.8167 11.6478C14.6853 12.7502 12.7879 14 9.99998 14C7.21206 14 5.31462 12.7502 4.18324 11.6478C3.61662 11.0957 3.33331 10.8197 3.33331 10C3.33331 9.18031 3.61662 8.90426 4.18324 8.35217C4.50406 8.03957 4.88647 7.71513 5.33331 7.41069"
@@ -246,19 +332,19 @@ const page = () => {
                 y1="16.4727"
                 x2="16.9995"
                 y2="3.61694"
-                stroke="#3D1DF3"
+                stroke={visibleConfirmPassword ? "":"#3D1DF3"}
               />
             </svg>
           </div>
-          <Link href="/">
+         
             <button
               type="submit"
               className="bg-[#00EA77] text-[#3D1DF3] rounded-2xl w-full h-9 text-lg mb-2 mt-8 /"
-              onClick={handleCreateAccount}
+             
             >
               Crear
             </button>
-          </Link>
+       
           <h4 className="flex text-[#3D1DF3] text-sm items-center mb-2 justify-center ">
             ¿Ya tenés una cuenta?
           </h4>

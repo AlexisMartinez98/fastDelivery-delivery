@@ -37,10 +37,10 @@ const singUpForm = useFormik({
 
   validationSchema: Yup.object({
     name: Yup.string()
-      .min(2, "Nombre debe tener al menos 1 carácter")
+      .min(2, "Nombre debe tener al menos 2 carácteres")
       .required("Nombre es requerido"),
     last_name: Yup.string()
-      .min(2, "Apellido debe tener al menos 1 carácter")
+      .min(2, "Apellido debe tener al menos 2 carácteres")
       .required("Apellido es requerido"),
     email: Yup.string().email("correo electrónico inválido").required("Correo electronico es requerido"),
     password: Yup.string()

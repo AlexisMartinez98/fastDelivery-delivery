@@ -1,15 +1,27 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
 
-
-export const setUser = createAction("SET_USER");
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   email:null,
 
 };
 
-export default createReducer(initialState, {
-  [setUser]: (state, action) => {return action.payload}
- 
-
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setUser: (state, action) => {
+     /*if (action.payload === null) {
+				localStorage.removeItem('token');
+			} else {
+				if (action.payload.token) {
+					localStorage.setItem('token', action.payload.token);
+				}
+			}*/
+			return action.payload;
+    },
+  },
 });
+
+export const { setUser } = userSlice.actions;
+export default userSlice.reducer;

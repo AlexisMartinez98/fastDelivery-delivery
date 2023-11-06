@@ -3,24 +3,33 @@ import React, { useEffect, useState } from "react";
 import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_etc.";
 import ButtonCancelarEntrega from "@/app/components/Button_Cancelar_Entrega";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Map from "@/app/components/Map";
 import axios from "axios";
 
 function DeliveryInProgress() {
+  
+  const router = useRouter();
+  const  {id}  = router.query;
+  //console.log(id);
+  
+  
+  
   interface paquete {
     address: string;
     receiver: string;
     _id: string;
   }
-
+  
   //id harcodeado para hacer pedido axios
-
+  
   const [infoPackage, setInfoPackage] = useState<paquete | {}>({});
-
-  const id = "653babf0f04d01f210398364";
-
+  
+  //const id = "653babf0f04d01f210398364";
+  
+  
+  
   const finalizarEntrega: any = () => {
     axios
       .put(`http://localhost:4000/api/v1/delivery/finishDelivery/${id}`)
@@ -42,7 +51,7 @@ function DeliveryInProgress() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
 
 

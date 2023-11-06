@@ -1,7 +1,7 @@
 "use strict";
 import React from "react";
 import Link from "next/link";
-
+import axios from "axios"
 
 interface BoxAddressProps {
 address: string;
@@ -11,6 +11,42 @@ itemId: string;
 }
 
 const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
+
+  const handleStartDelivery = () => {
+    console.log(("clic en inciar jornada"));
+        axios
+        .put(`http://localhost:4000/api/v1/delivery/updateStatus/${itemId}`, {
+        status: 'EN CURSO',
+        })
+        .then((response) => {
+         console.log("RESPONSE", response);
+         
+                 
+        })
+        .catch((error) => {
+        console.error('Error al actualizar el estado del paquete:', error);
+        });
+        
+    };
+
+
+    const handleCancelPackage = () => {
+      axios
+        .put(`http://localhost:4000/api/v1/delivery/cancelPackage/${itemId}`)
+        .then((response) => {
+          console.log("Paquete cancelado", response);
+          window.location.reload();
+        
+        })
+        .catch((error) => {
+          console.error('Error al cancelar el paquete:', error);
+        });
+    };
+    
+
+   
+
+
 return (
 <div className="flex mx-5 py-3 border-[#3D1DF3] border-[1.5px] rounded-2xl items-center my-3">
 <svg
@@ -52,7 +88,9 @@ strokeDasharray="1 1"
 </svg>
 <div className="flex flex-col items-start w-64">
 <div className="flex justify-between w-full ml-3 items-center">
-<h3 className="font-semibold text-sm uppercase">#{itemId}</h3>
+
+
+<h3 className="font-semibold text-sm uppercase">#{itemId.slice(-5)}</h3>
 <h4
 className={`text-[12px] rounded-2xl text-center px-3 ${
 status === "ENTREGADO" ? "bg-[#C7FFB1]" : "bg-[#F8E169]"
@@ -68,11 +106,14 @@ status === "ENTREGADO" ? "bg-[#C7FFB1]" : "bg-[#F8E169]"
 </p>
 {status === "PENDIENTE" ? ( 
 <div className="flex j">
-<Link href="#">
-<button className="bg-[#00EA77] text-[#3D1DF3] mt-4 rounded-full py-1 w-[110px]">
+
+
+ <Link href={`/delivery/in_progress/${itemId}`}>  
+<button className="bg-[#00EA77] text-[#3D1DF3] mt-4 rounded-full py-1 w-[110px]"  onClick={handleStartDelivery}>
 Iniciar
 </button>
-</Link>
+ </Link> 
+
 </div>
 ) : ( 
 <svg
@@ -82,6 +123,7 @@ viewBox="0 0 20 20"
 fill="none"
 xmlns="http://www.w3.org/2000/svg"
 className="mr-3"
+onClick={handleCancelPackage} 
 > 
 <path
 d="M8.11377 4.66671C8.38833 3.88991 9.12915 3.33337 9.99997 3.33337C10.8708 3.33337 11.6116 3.88991 11.8862 4.66671"

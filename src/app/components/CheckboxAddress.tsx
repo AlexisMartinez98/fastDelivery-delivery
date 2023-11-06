@@ -4,7 +4,7 @@ import React, { useState } from "react";
 type CheckboxAddressProps = {
   itemId: string;
   address: string;
-  setSelectedPackages: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedPackages: (packageId: string) => void;
 };
 
 const CheckboxAddress: React.FC<CheckboxAddressProps> = ({
@@ -24,9 +24,9 @@ const CheckboxAddress: React.FC<CheckboxAddressProps> = ({
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     if (!isChecked) {
-      setSelectedPackages((prev) => [...prev, itemId]);
+      setSelectedPackages(itemId);
     } else {
-      setSelectedPackages((prev) => prev.filter((item) => item !== itemId));
+      setSelectedPackages(itemId);
     }
   };
   return (

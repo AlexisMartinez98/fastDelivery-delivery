@@ -1,5 +1,7 @@
 "use strict";
 import React from "react";
+
+
 interface BoxAddressProps {
   address: string;
   status: string;
@@ -46,13 +48,13 @@ const BoxAddressOk: React.FC<BoxAddressProps> = ({
           x2="0.249998"
           y2="60"
           stroke="#3D1DF3"
-          strokeWidth="0.5" // Cambia stroke-width a strokeWidth
-          strokeDasharray="1 1" // Cambia stroke-dasharray a strokeDasharray
+          strokeWidth="0.5" 
+          strokeDasharray="1 1" 
         />
       </svg>
       <div className="flex flex-col items-start w-64">
         <div className="flex justify-between w-full ml-3 items-center">
-          <h3 className="font-semibold text-sm uppercase">#{itemId}</h3>
+          <h3 className="font-semibold text-sm uppercase">#{itemId.slice(-5)}</h3>
           <h4
             className={`text-[12px] rounded-2xl text-center px-3 ${
               status === "ENTREGADO" ? "bg-[#C7FFB1]" : "bg-[#F8E169]"

@@ -70,7 +70,7 @@ const finalizar=()=>{
     }
     if(!drunkAlcohol && !usedDrugs && !personalProblems){
         alert("Que tenga una buena jornada de trabajo!!!")
-        router.push("start_day");
+        router.push("get_packages");
 
     }
 

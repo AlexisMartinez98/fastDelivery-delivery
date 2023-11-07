@@ -23,6 +23,7 @@ export default function RootLayout({
 }) {
 
   const dispatch=useDispatch()
+  const router=useRouter()
 
   useEffect(() => {
     axios
@@ -35,6 +36,10 @@ export default function RootLayout({
         console.log( response.data);
         dispatch(setUser(response.data))
       })
+      .catch(({ error }) => {
+        console.error(error)
+        router.push("/login")
+      });
  
   }, []);
 

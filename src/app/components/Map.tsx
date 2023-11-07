@@ -6,14 +6,11 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 
-
 interface MapProps {
   addressDestination: string;
-  
-  }
+}
 
-  function Map({ addressDestination }: MapProps) {
-    
+function Map({ addressDestination }: MapProps) {
   const override = {
     display: "block",
     margin: "0 auto",
@@ -31,16 +28,13 @@ interface MapProps {
   const [directionResponse, setDirectionResponse] =
     useState<google.maps.DirectionsResult | null>(null);
 
-    //agregar la key aca======>
+  //agregar la key aca======>
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "",
     libraries: ["places"],
   });
 
-  
-//La prop que estoy recibiendo
-  const address = addressDestination
-  console.log("adress",address)
+  const address = addressDestination;
 
   const geocodeDestination = async (address: string, isLoaded: boolean) => {
     if (isLoaded) {
@@ -69,11 +63,10 @@ interface MapProps {
         const { latitude, longitude } = position.coords;
         setUserLocation({ lat: latitude, lng: longitude });
       });
-      
 
       geocodeDestination(address, isLoaded);
     }
-  }, [isLoaded]);
+  }, [isLoaded, address]);
 
   useEffect(() => {
     if (userLocation && isLoaded && destinationCoordinates) {

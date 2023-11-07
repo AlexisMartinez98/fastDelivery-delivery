@@ -4,7 +4,6 @@ import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_
 import ButtonCancelarEntrega from "@/app/components/Button_Cancelar_Entrega";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 import Map from "@/app/components/Map";
 import axios from "axios";
 

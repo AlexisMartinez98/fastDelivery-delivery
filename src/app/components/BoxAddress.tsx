@@ -48,6 +48,7 @@ const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
 
 
 return (
+  <Link href={`/in_progress/${itemId}`}>  
 <div className="flex mx-5 py-3 border-[#3D1DF3] border-[1.5px] rounded-2xl items-center my-3">
 <svg
 width="40"
@@ -156,6 +157,7 @@ strokeLinecap="round"
 </div>
 </div>
 </div>
+</Link>
 );
 };
 

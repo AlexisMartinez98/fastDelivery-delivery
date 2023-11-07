@@ -11,7 +11,6 @@ function DeliveryInProgress() {
   
   const router = useRouter();
   const  {id}  = router.query;
-  //console.log(id);
   
   
   
@@ -23,17 +22,18 @@ function DeliveryInProgress() {
   
   //id harcodeado para hacer pedido axios
   
-  const [infoPackage, setInfoPackage] = useState<paquete | {}>({});
+  const [infoPackage, setInfoPackage] = useState<paquete>({ address: "", receiver: "", _id: "" });
   
   //const id = "653babf0f04d01f210398364";
   
+  console.log("infopackage",infoPackage)
   
   
   const finalizarEntrega: any = () => {
     axios
       .put(`http://localhost:4000/api/v1/delivery/finishDelivery/${id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log("Dataaaaaaaaaa",response.data);
         console.log("paquete entregado")
       })
       .catch((error) => {
@@ -42,6 +42,7 @@ function DeliveryInProgress() {
   };
 
   useEffect(() => {
+    if(id){
     axios
       .get(`http://localhost:4000/api/v1/delivery/${id}`)
       .then((response) => {
@@ -50,6 +51,7 @@ function DeliveryInProgress() {
       .catch((error) => {
         console.log(error);
       });
+    }
   }, [id]);
 
 
@@ -83,7 +85,7 @@ function DeliveryInProgress() {
 
       <div className="py-5 bg-[#ffffff] rounded-xl relative top-[-7px] flex flex-col items-center ">
         <div className="w-[90%] h-[327px] rounded-xl border-[#3D1DF3] border-[1.5px]">
-          <Map />
+          <Map addressDestination={infoPackage.address} />
         </div>
         <div className="my-5 w-[90%] text-[0.90rem] font-semibold text-[#3D1DF3] ">
           <p className="mt-1">

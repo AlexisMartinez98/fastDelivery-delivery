@@ -6,7 +6,14 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 
-function Map() {
+
+interface MapProps {
+  addressDestination: string;
+  
+  }
+
+  function Map({ addressDestination }: MapProps) {
+    
   const override = {
     display: "block",
     margin: "0 auto",
@@ -24,13 +31,16 @@ function Map() {
   const [directionResponse, setDirectionResponse] =
     useState<google.maps.DirectionsResult | null>(null);
 
-    //agregar la key aca==>
+    //agregar la key aca======>
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "",
     libraries: ["places"],
   });
 
-  const address = "Pelegrini 3000, Rosario, Santa Fe";
+  
+//La prop que estoy recibiendo
+  const address = addressDestination
+  console.log("adress",address)
 
   const geocodeDestination = async (address: string, isLoaded: boolean) => {
     if (isLoaded) {
@@ -59,6 +69,7 @@ function Map() {
         const { latitude, longitude } = position.coords;
         setUserLocation({ lat: latitude, lng: longitude });
       });
+      
 
       geocodeDestination(address, isLoaded);
     }

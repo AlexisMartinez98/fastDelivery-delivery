@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-const navBar = () => {
+const NavBar = () => {
   const router = useRouter();
   function clearCookies() {
     Cookies.remove("token");
@@ -123,4 +123,4 @@ const navBar = () => {
   );
 };
 
-export default navBar;
+export default NavBar;

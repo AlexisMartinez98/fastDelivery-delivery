@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_etc.";
 import Button_SI_NO from "@/app/components/Button_SI_NO";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -12,76 +11,80 @@ function Declaration() {
   const token = Cookies.get("token");
   if (!token) {
     router.push("/login");
-
   }
 
+  const [drunkAlcohol, setDrunkAlcohol] = useState<Boolean | null>(null);
+  const [usedDrugs, setUseDrugs] = useState<Boolean | null>(null);
+  const [personalProblems, setpersonalProblems] = useState<Boolean | null>(
+    null
+  );
+  const [color1, setColor1] = useState(false);
+  const [color2, setColor2] = useState(false);
+  const [color3, setColor3] = useState(false);
+  const [clicked1, setClicked1] = useState(false);
+  const [clicked2, setClicked2] = useState(false);
+  const [clicked3, setClicked3] = useState(false);
 
-const [drunkAlcohol,setDrunkAlcohol]=useState <Boolean|null>(null)
-const [usedDrugs,setUseDrugs]=useState<Boolean|null>(null)
-const [personalProblems,setpersonalProblems]=useState<Boolean|null>(null)
-const[color1,setColor1]=useState(false)
-const[color2,setColor2]=useState(false)
-const[color3,setColor3]=useState(false)
-const[clicked1,setClicked1]=useState(false)
-const[clicked2,setClicked2]=useState(false)
-const[clicked3,setClicked3]=useState(false)
-
-const handleAlcohol=(buttonName:string)=>{
-    if(buttonName==="SI")
-    {setDrunkAlcohol(true)
-    setColor1(true)
-    setClicked1(true)}
-    if(buttonName==="NO")
-    {setDrunkAlcohol(false)
-    setColor1(true)
-    setClicked1(true)}
-}
-const handleDrugs=(buttonName:string)=>{
-    if(buttonName==="SI")
-    {setUseDrugs(true)
-    setColor2(true)
-    setClicked2(true)}
-    if(buttonName==="NO")
-    {setUseDrugs(false)
-    setColor2(true)
-    setClicked2(true)}
-}
-
-const handlePersonalProblems=(buttonName:string)=>{
-    if(buttonName==="SI")
-    {setpersonalProblems(true)
-    setColor3(true)
-    setClicked3(true)}
-    if(buttonName==="NO")
-    {setpersonalProblems(false)
-    setColor3(true)
-    setClicked3(true)}
-}
-
-const finalizar=()=>{
-    if(drunkAlcohol===null || usedDrugs===null || personalProblems===null){
-        alert("Debe completar todos los campos")
-        return
+  const handleAlcohol = (buttonName: string) => {
+    if (buttonName === "SI") {
+      setDrunkAlcohol(true);
+      setColor1(true);
+      setClicked1(true);
     }
-    if(drunkAlcohol===true || usedDrugs===true || personalProblems===true){
-        alert("Usted no esta apto para conducir")
-        router.push("start_day");
-
+    if (buttonName === "NO") {
+      setDrunkAlcohol(false);
+      setColor1(true);
+      setClicked1(true);
     }
-    if(!drunkAlcohol && !usedDrugs && !personalProblems){
-        alert("Que tenga una buena jornada de trabajo!!!")
-        router.push("get_packages");
-
+  };
+  const handleDrugs = (buttonName: string) => {
+    if (buttonName === "SI") {
+      setUseDrugs(true);
+      setColor2(true);
+      setClicked2(true);
     }
+    if (buttonName === "NO") {
+      setUseDrugs(false);
+      setColor2(true);
+      setClicked2(true);
+    }
+  };
 
+  const handlePersonalProblems = (buttonName: string) => {
+    if (buttonName === "SI") {
+      setpersonalProblems(true);
+      setColor3(true);
+      setClicked3(true);
+    }
+    if (buttonName === "NO") {
+      setpersonalProblems(false);
+      setColor3(true);
+      setClicked3(true);
+    }
+  };
 
-}
-
-console.log("alcoool",drunkAlcohol)
-console.log("drugs",usedDrugs)
-console.log("problems",personalProblems)
-
-
+  const finalizar = () => {
+    if (
+      drunkAlcohol === null ||
+      usedDrugs === null ||
+      personalProblems === null
+    ) {
+      alert("Debe completar todos los campos");
+      return;
+    }
+    if (
+      drunkAlcohol === true ||
+      usedDrugs === true ||
+      personalProblems === true
+    ) {
+      alert("Usted no esta apto para conducir");
+      router.push("start_day");
+    }
+    if (!drunkAlcohol && !usedDrugs && !personalProblems) {
+      alert("Que tenga una buena jornada de trabajo!!!");
+      router.push("get_packages");
+    }
+  };
 
   return (
     <main className="mr-6 ml-6 mt-4 mb-4 font-poppins ">
@@ -115,18 +118,29 @@ console.log("problems",personalProblems)
           <p>Requerido*</p>
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
-        <div className="w-[90%] mx-auto">
-          <p className="text-center text-[14px] mt-[2%] font-medium">
+          <div className="w-[90%] mx-auto">
+            <p className="text-center text-[14px] mt-[2%] font-medium">
               ¿Ha consumido bebidas alcoholícas
               <br />
               en las ultimas 12 horas
             </p>
           </div>
           <div className="w-[70%] flex justify-between mx-auto my-[3%]">
-            <Button_SI_NO buttonName="SI" color={color1} clicked={clicked1} declaration={drunkAlcohol} handleState={handleAlcohol}/>
-          <Button_SI_NO buttonName="NO" color={color1} clicked={clicked1} declaration={!drunkAlcohol} handleState={handleAlcohol}/>
+            <Button_SI_NO
+              buttonName="SI"
+              color={color1}
+              clicked={clicked1}
+              declaration={drunkAlcohol}
+              handleState={handleAlcohol}
+            />
+            <Button_SI_NO
+              buttonName="NO"
+              color={color1}
+              clicked={clicked1}
+              declaration={!drunkAlcohol}
+              handleState={handleAlcohol}
+            />
           </div>
-          
         </div>
 
         <div className="w-[90%] text-[12px] mt-[2%]">
@@ -134,7 +148,7 @@ console.log("problems",personalProblems)
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
           <div className="w-[90%] mx-auto">
-          <p className="text-center text-[14px] my-[2%] font-medium">
+            <p className="text-center text-[14px] my-[2%] font-medium">
               ¿Usted está haciendo uso de algún
               <br /> tipo de medicamento psicoactivo?
             </p>
@@ -146,8 +160,20 @@ console.log("problems",personalProblems)
             </p>
           </div>
           <div className="w-[70%] flex justify-between mx-auto my-[3%]">
-          <Button_SI_NO buttonName="SI" color={color2} clicked={clicked2} declaration={usedDrugs} handleState={handleDrugs}/>
-          <Button_SI_NO buttonName="NO" color={color2} clicked={clicked2} declaration={!usedDrugs} handleState={handleDrugs}/>
+            <Button_SI_NO
+              buttonName="SI"
+              color={color2}
+              clicked={clicked2}
+              declaration={usedDrugs}
+              handleState={handleDrugs}
+            />
+            <Button_SI_NO
+              buttonName="NO"
+              color={color2}
+              clicked={clicked2}
+              declaration={!usedDrugs}
+              handleState={handleDrugs}
+            />
           </div>
         </div>
 
@@ -155,21 +181,36 @@ console.log("problems",personalProblems)
           <p>Requerido*</p>
         </div>
         <div className="w-[90%]  rounded-xl border-[#3D1DF3] border-[1.5px]">
-        <div className="w-[90%] mx-auto">
-          <p className="text-center text-[14px] mt-[2%] font-medium">
+          <div className="w-[90%] mx-auto">
+            <p className="text-center text-[14px] mt-[2%] font-medium">
               ¿Tiene usted algún problema familiar,
               <br /> emocional o de cualquier <br />
               tipo que lo distraiga?
             </p>
           </div>
           <div className="w-[70%] flex justify-between mx-auto my-[3%]">
-          <Button_SI_NO buttonName="SI" color={color3} clicked={clicked3} declaration={personalProblems} handleState={handlePersonalProblems}/>
-          <Button_SI_NO buttonName="NO" color={color3} clicked={clicked3} declaration={!personalProblems} handleState={handlePersonalProblems}/>
+            <Button_SI_NO
+              buttonName="SI"
+              color={color3}
+              clicked={clicked3}
+              declaration={personalProblems}
+              handleState={handlePersonalProblems}
+            />
+            <Button_SI_NO
+              buttonName="NO"
+              color={color3}
+              clicked={clicked3}
+              declaration={!personalProblems}
+              handleState={handlePersonalProblems}
+            />
           </div>
         </div>
 
         <div className="w-[100%] flex justify-center mt-[4%]">
-          <ButtonIngresarFinalizar buttonName={"Continuar"} finalizar={finalizar} />
+          <ButtonIngresarFinalizar
+            buttonName={"Continuar"}
+            finalizar={finalizar}
+          />
         </div>
       </div>
     </main>

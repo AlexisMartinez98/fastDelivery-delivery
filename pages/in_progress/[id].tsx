@@ -1,21 +1,13 @@
-import { useRouter } from 'next/router';
-import DeliveryInProgress from './page'; 
-
-
+import DeliveryInProgress from "./page";
+import "./index.css";
+import "tailwindcss/tailwind.css";
 
 function DeliveryPage() {
-    const router = useRouter();
-    const { id } = router.query;
-    const packageId = id as string
-  
-    return 
+  return (
     <>
-    <DeliveryInProgress  />
+      <DeliveryInProgress />
     </>
-
-  }
-  
-
-
+  );
+}
 
 export default DeliveryPage;

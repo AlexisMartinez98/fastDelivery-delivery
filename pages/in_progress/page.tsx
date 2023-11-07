@@ -11,7 +11,6 @@ function DeliveryInProgress() {
   
   const router = useRouter();
   const  {id}  = router.query;
-  //console.log(id);
   
   
   

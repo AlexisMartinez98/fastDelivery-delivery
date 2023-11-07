@@ -10,7 +10,6 @@ import {
 interface MapProps {
   addressDestination: string;
   
-  
   }
 
   function Map({ addressDestination }: MapProps) {
@@ -34,13 +33,14 @@ interface MapProps {
 
     //agregar la key aca==>
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBgSTfiSrJsLXl7G7cP04NVX0jBC01Weuo",
+    googleMapsApiKey: "",
     libraries: ["places"],
   });
 
   
-
-  const address = addressDestination;
+//La prop que estoy recibiendo
+  const address = addressDestination
+  console.log("adress",address)
 
   const geocodeDestination = async (address: string, isLoaded: boolean) => {
     if (isLoaded) {

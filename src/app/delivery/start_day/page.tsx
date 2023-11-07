@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
+import Map from "@/app/components/Map";
 
 type AddressItem = {
   _id: string;
@@ -144,6 +145,9 @@ const page = () => {
           </button>
         </Link>
       </div>
+      <div className="w-[90%] h-[327px] hidden">
+          <Map />
+        </div>
     </main>
   );
 };

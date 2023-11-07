@@ -6,7 +6,15 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 
-function Map() {
+
+interface MapProps {
+  addressDestination: string;
+  
+  
+  }
+
+  function Map({ addressDestination }: MapProps) {
+    
   const override = {
     display: "block",
     margin: "0 auto",
@@ -26,11 +34,13 @@ function Map() {
 
     //agregar la key aca==>
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyBgSTfiSrJsLXl7G7cP04NVX0jBC01Weuo",
     libraries: ["places"],
   });
 
-  const address = "Pelegrini 3000, Rosario, Santa Fe";
+  
+
+  const address = addressDestination;
 
   const geocodeDestination = async (address: string, isLoaded: boolean) => {
     if (isLoaded) {
@@ -59,6 +69,7 @@ function Map() {
         const { latitude, longitude } = position.coords;
         setUserLocation({ lat: latitude, lng: longitude });
       });
+      
 
       geocodeDestination(address, isLoaded);
     }

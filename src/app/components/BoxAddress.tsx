@@ -108,7 +108,7 @@ status === "ENTREGADO" ? "bg-[#C7FFB1]" : "bg-[#F8E169]"
 <div className="flex j">
 
 
- <Link href={`/delivery/in_progress/${itemId}`}>  
+ <Link href={`/in_progress/${itemId}`}>  
 <button className="bg-[#00EA77] text-[#3D1DF3] mt-4 rounded-full py-1 w-[110px]"  onClick={handleStartDelivery}>
 Iniciar
 </button>

@@ -30,7 +30,7 @@ function Map({ addressDestination }: MapProps) {
 
   //agregar la key aca======>
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyBgSTfiSrJsLXl7G7cP04NVX0jBC01Weuo",
     libraries: ["places"],
   });
 
@@ -86,9 +86,6 @@ function Map({ addressDestination }: MapProps) {
       });
     }
   }, [userLocation, isLoaded, destinationCoordinates]);
-
-  console.log("destinationCoordinates", destinationCoordinates);
-  console.log("directionResponse", directionResponse);
 
   if (loadError) {
     return <div>Error al cargar el mapa</div>;

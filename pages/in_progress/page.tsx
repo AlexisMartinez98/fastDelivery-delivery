@@ -6,61 +6,53 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Map from "@/app/components/Map";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function DeliveryInProgress() {
-  
   const router = useRouter();
-  const  {id}  = router.query;
-  
-  
-  
+  const { id } = router.query;
+
   interface paquete {
     address: string;
     receiver: string;
     _id: string;
   }
-  
-  //id harcodeado para hacer pedido axios
-  
-  const [infoPackage, setInfoPackage] = useState<paquete>({ address: "", receiver: "", _id: "" });
-  
-  //const id = "653babf0f04d01f210398364";
-  
-  console.log("infopackage",infoPackage)
-  
-  
+  const [infoPackage, setInfoPackage] = useState<paquete>({
+    address: "",
+    receiver: "",
+    _id: "",
+  });
+
   const finalizarEntrega: any = () => {
     axios
       .put(`http://localhost:4000/api/v1/delivery/finishDelivery/${id}`)
-      .then((response) => {
-        console.log("Dataaaaaaaaaa",response.data);
-        console.log("paquete entregado")
+      .then(() => {
+        router.push("/delivery/start_day");
+        toast.success("Paquete entregado.");
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
   useEffect(() => {
-    if(id){
-    axios
-      .get(`http://localhost:4000/api/v1/delivery/${id}`)
-      .then((response) => {
-        setInfoPackage(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (id) {
+      axios
+        .get(`http://localhost:4000/api/v1/delivery/${id}`)
+        .then((response) => {
+          setInfoPackage(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }, [id]);
-
-
 
   return (
     <main className="mr-6 ml-6 mt-4 mb-8 font-poppins ">
       <div className="profile-info rounded-tl-[10px] rounded-tr-[10px] text-[#3D1DF3] bg-[#C7FFB1] pb-2">
         <div className="h-16 flex items-center justify-between  ">
-          <Link href="/delivery/get_packages">
+          <Link href="/delivery/start_day">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

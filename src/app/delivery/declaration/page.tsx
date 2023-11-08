@@ -5,6 +5,7 @@ import Button_SI_NO from "@/app/components/Button_SI_NO";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 function Declaration() {
   const router = useRouter();
@@ -69,7 +70,7 @@ function Declaration() {
       usedDrugs === null ||
       personalProblems === null
     ) {
-      alert("Debe completar todos los campos");
+      toast.error("Debe completar todos los campos");
       return;
     }
     if (
@@ -77,11 +78,11 @@ function Declaration() {
       usedDrugs === true ||
       personalProblems === true
     ) {
-      alert("Usted no esta apto para conducir");
+      toast.error("Usted no esta apto para conducir");
       router.push("start_day");
     }
     if (!drunkAlcohol && !usedDrugs && !personalProblems) {
-      alert("Que tenga una buena jornada de trabajo!!!");
+      toast.success("Que tenga una buena jornada de trabajo!!!");
       router.push("get_packages");
     }
   };
@@ -90,7 +91,7 @@ function Declaration() {
     <main className="mr-6 ml-6 mt-4 mb-4 font-poppins ">
       <div className="profile-info rounded-tl-[10px] rounded-tr-[10px] text-[#3D1DF3] bg-[#C7FFB1] pb-2">
         <div className="h-16 flex items-center justify-between  ">
-          <Link href="/delivery/get_packages">
+          <Link href="/delivery/start_day">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -23,7 +23,13 @@ export default function RootLayout({
         },
       })
       .then((response) => {
-        dispatch(setUser(response.data));
+       
+        const dataUser={
+          email:response.data.email,
+          id:response.data.id,
+          is_admin:response.data.is_admin
+        }
+        dispatch(setUser(dataUser));
       })
       .catch(({ error }) => {
         console.error(error);

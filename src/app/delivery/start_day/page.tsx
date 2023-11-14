@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import Map from "@/app/components/Map";
+import { UserState } from "@/app/states/user";
 
 type AddressItem = {
   _id: string;
@@ -22,7 +23,7 @@ const page = () => {
     router.push("/login");
   }
 
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state: { user: UserState }) => state);
 
   const [isPendingExpanded, setIsPendingExpanded] = useState(true);
   const [isHistoryExpanded, setIsHistoryExpanded] = useState(true);
@@ -152,7 +153,7 @@ const page = () => {
         </Link>
       </div>
       <div className="w-[90%] h-[327px] hidden">
-        <Map />
+        <Map addressDestination={""} />
       </div>
     </main>
   );

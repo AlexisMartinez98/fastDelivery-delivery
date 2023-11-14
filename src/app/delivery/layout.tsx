@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import NavBar from "../components/navBar";
 import { useEffect } from "react";
 import axios from "axios";

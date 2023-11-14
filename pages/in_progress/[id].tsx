@@ -1,4 +1,4 @@
-
+import React from "react";
 import DeliveryInProgress from "./page";
 import "./index.css";
 import "tailwindcss/tailwind.css";

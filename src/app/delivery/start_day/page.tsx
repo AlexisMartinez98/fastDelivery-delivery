@@ -4,8 +4,6 @@ import axios from "axios";
 import BoxAddress from "@/app/components/BoxAddress";
 import BoxAddressOk from "@/app/components/BoxAddressOk";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import Map from "@/app/components/Map";
 import { UserState } from "@/app/states/user";
@@ -17,11 +15,8 @@ type AddressItem = {
 };
 
 const page = () => {
-  const router = useRouter();
-  const token = Cookies.get("token");
-  if (!token) {
-    router.push("/login");
-  }
+  
+
 
   const { user } = useSelector((state: { user: UserState }) => state);
 

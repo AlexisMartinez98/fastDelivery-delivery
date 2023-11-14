@@ -1,12 +1,9 @@
-import { useRouter } from "next/router";
 import ConfirmPass from "./page";
 import "tailwindcss/tailwind.css";
 import "./index.css";
+import React from "react";
 
 const NewPasswordTokenPage = () => {
-  const router = useRouter();
-  const { token } = router.query;
-
   return (
     <div className="bg-blue-600">
       <ConfirmPass />

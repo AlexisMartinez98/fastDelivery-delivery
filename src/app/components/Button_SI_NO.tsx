@@ -2,10 +2,10 @@ import React from "react";
 
 interface buttonNameProps {
   buttonName: string;
-  color:Boolean;
-  clicked:Boolean;
+  color:boolean;
+  clicked:boolean;
   handleState?: any;
-  declaration?:Boolean | null
+  declaration?:boolean | null
 }
 
 const Button_SI_NO: React.FC<buttonNameProps> = ({ buttonName,color,clicked,handleState,declaration }) => {

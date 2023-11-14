@@ -31,11 +31,13 @@ const Page = () => {
         .catch((error) => console.error("Error al obtener paquetes:", error));
     }
 
-    const tokenParts = token.split(".");
-    if (tokenParts.length === 3) {
-      const payload = atob(tokenParts[1]);
-      const payloadData = JSON.parse(payload);
-      setUserId(payloadData.id);
+    if (token) {
+      const tokenParts = token.split(".");
+      if (tokenParts.length === 3) {
+        const payload = atob(tokenParts[1]);
+        const payloadData = JSON.parse(payload);
+        setUserId(payloadData.id);
+      }
     }
   }, [token, router]);
 

@@ -7,9 +7,22 @@ import { useRouter } from "next/router";
 import Map from "@/app/components/Map";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 function DeliveryInProgress() {
   const router = useRouter();
+
+  useEffect(() => {
+    const tokenInCookie = Cookies.get("token");
+    console.log("token", tokenInCookie);
+
+    if (!tokenInCookie) {
+      if (typeof window !== "undefined") {
+        router.push("/login");
+      }
+    }
+  }, []);
+
   const { id } = router.query;
 
   interface paquete {

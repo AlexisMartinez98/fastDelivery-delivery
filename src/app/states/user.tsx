@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface UserState {
   email: string | null;
   id: string | null;
-  is_admin: Boolean | null;
+  is_admin: boolean | null;
 
 }
 

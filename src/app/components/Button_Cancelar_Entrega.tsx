@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";

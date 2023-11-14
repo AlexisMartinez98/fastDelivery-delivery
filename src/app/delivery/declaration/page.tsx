@@ -4,19 +4,14 @@ import ButtonIngresarFinalizar from "@/app/components/Button_ingresar_finalizar_
 import Button_SI_NO from "@/app/components/Button_SI_NO";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 function Declaration() {
   const router = useRouter();
-  const token = Cookies.get("token");
-  if (!token) {
-    router.push("/login");
-  }
 
-  const [drunkAlcohol, setDrunkAlcohol] = useState<Boolean | null>(null);
-  const [usedDrugs, setUseDrugs] = useState<Boolean | null>(null);
-  const [personalProblems, setpersonalProblems] = useState<Boolean | null>(
+  const [drunkAlcohol, setDrunkAlcohol] = useState<boolean | null>(null);
+  const [usedDrugs, setUseDrugs] = useState<boolean | null>(null);
+  const [personalProblems, setpersonalProblems] = useState<boolean | null>(
     null
   );
   const [color1, setColor1] = useState(false);

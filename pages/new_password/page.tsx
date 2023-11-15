@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { awsIP } from "../../awsIP";
 
 const NewPasswordPage = () => {
   const [value, setValue] = useState({
@@ -18,7 +19,7 @@ const NewPasswordPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/v1/user/newPassword/${token}`,
+        `${awsIP}/api/v1/user/newPassword/${token}`,
         value
       );
       toast.success(response.data.msg);

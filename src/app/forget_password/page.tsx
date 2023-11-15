@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { awsIP } from "../../../awsIP";
 
 const page = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const page = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/user/forgetPassword",
+        `${awsIP}/api/v1/user/forgetPassword`,
         value
       );
       toast.success(response.data.msg);

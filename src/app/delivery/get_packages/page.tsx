@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { awsIP } from "../../../../awsIP";
 
 type AddressItem = {
   _id: string;
@@ -24,7 +25,7 @@ const Page = () => {
       router.push("/login");
     } else {
       axios
-        .get("http://localhost:4000/api/v1/delivery/allPackages")
+        .get(`${awsIP}/api/v1/delivery/allPackages`)
         .then((response) => {
           setPackages(response.data);
         })
@@ -53,7 +54,7 @@ const Page = () => {
 
   const updatePackage = (packageId: string, assigned: boolean) => {
     axios
-      .patch("http://localhost:4000/api/v1/delivery/takePackage", {
+      .patch(`${awsIP}/api/v1/delivery/takePackage`, {
         package_id: packageId,
         deliveryMan_id: userId,
         assigned: assigned,

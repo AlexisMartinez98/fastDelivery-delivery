@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve@latest out",
     "lint": "next lint",
     "prepare": "husky install"
   },
@@ -37,6 +37,7 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "copy-webpack-plugin": "^11.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1"
   }

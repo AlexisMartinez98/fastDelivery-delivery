@@ -8,6 +8,7 @@ import Map from "@/app/components/Map";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { awsIP } from "../../awsIP";
 
 function DeliveryInProgress() {
   const router = useRouter();
@@ -38,7 +39,7 @@ function DeliveryInProgress() {
 
   const finalizarEntrega: any = () => {
     axios
-      .put(`http://localhost:4000/api/v1/delivery/finishDelivery/${id}`)
+      .put(`${awsIP}/api/v1/delivery/finishDelivery/${id}`)
       .then(() => {
         router.push("/delivery/start_day");
         toast.success("Paquete entregado.");
@@ -51,7 +52,7 @@ function DeliveryInProgress() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:4000/api/v1/delivery/${id}`)
+        .get(`${awsIP}/api/v1/delivery/${id}`)
         .then((response) => {
           setInfoPackage(response.data);
         })

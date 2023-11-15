@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import Map from "@/app/components/Map";
 import { UserState } from "@/app/states/user";
+import { awsIP } from "../../../../awsIP";
 
 type AddressItem = {
   _id: string;
@@ -15,9 +16,6 @@ type AddressItem = {
 };
 
 const page = () => {
-  
-
-
   const { user } = useSelector((state: { user: UserState }) => state);
 
   const [isPendingExpanded, setIsPendingExpanded] = useState(true);
@@ -29,7 +27,7 @@ const page = () => {
   useEffect(() => {
     if (user.id) {
       axios
-        .post("http://localhost:4000/api/v1/delivery/history", {
+        .post(`${awsIP}/api/v1/delivery/history`, {
           deliveryMan_id: user.id,
         })
         .then((response) => {
@@ -42,7 +40,7 @@ const page = () => {
 
     if (user.id) {
       axios
-        .post("http://localhost:4000/api/v1/delivery/pendingDeliveries", {
+        .post(`${awsIP}/api/v1/delivery/pendingDeliveries`, {
           deliveryMan_id: user.id,
         })
         .then((response) => {

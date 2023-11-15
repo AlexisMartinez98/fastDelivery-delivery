@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setUser } from "../states/user";
+import { awsIP } from "../../../awsIP";
 
 export default function RootLayout({
   children,
@@ -18,18 +19,17 @@ export default function RootLayout({
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/user/me", {
+      .get(`${awsIP}/api/v1/user/me`, {
         headers: {
           cookies: `${Cookies.get("token")}`,
         },
       })
       .then((response) => {
-       
-        const dataUser={
-          email:response.data.email,
-          id:response.data.id,
-          is_admin:response.data.is_admin
-        }
+        const dataUser = {
+          email: response.data.email,
+          id: response.data.id,
+          is_admin: response.data.is_admin,
+        };
         dispatch(setUser(dataUser));
       })
       .catch(({ error }) => {

@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { awsIP } from "../../awsIP";
 
 const ConfirmPass = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const ConfirmPass = () => {
     const handleCreateAccount = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/user/confirm/${token}`
+          `${awsIP}/api/v1/user/confirm/${token}`
         );
         toast.success(response.data.msg);
         setTimeout(() => {

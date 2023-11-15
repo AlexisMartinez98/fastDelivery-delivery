@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { awsIP } from "../../../awsIP";
 interface BoxAddressProps {
   address: string;
   status: string;
@@ -12,7 +13,7 @@ interface BoxAddressProps {
 const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
   const handleStartDelivery = () => {
     axios
-      .put(`http://localhost:4000/api/v1/delivery/updateStatus/${itemId}`, {
+      .put(`${awsIP}/api/v1/delivery/updateStatus/${itemId}`, {
         status: "EN CURSO",
       })
       .then(() => {})
@@ -23,7 +24,7 @@ const BoxAddress: React.FC<BoxAddressProps> = ({ address, status, itemId }) => {
 
   const handleCancelPackage = () => {
     axios
-      .put(`http://localhost:4000/api/v1/delivery/cancelPackage/${itemId}`)
+      .put(`${awsIP}/api/v1/delivery/cancelPackage/${itemId}`)
       .then(() => {
         toast.success("paquete cancelado");
         window.location.reload();

@@ -1,1 +1,1 @@
-export const awsIP: string = "http://18.224.78.93:4000";
+export const awsIP: string = "http://3.135.198.212:4000";
